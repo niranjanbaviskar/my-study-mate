@@ -170,7 +170,7 @@ const TherapyCards = () => {
     <div className="flex items-center gap-6">
       <Music className="w-8 h-8 animate-bounce" />
       <div>
-        <p className="text-lg font-semibold">Relaxing Melody</p>
+        <p className="text-lg font-semibold">Relaxing Melody songs</p>
         <p className="text-base opacity-90">Let the music calm your mind...</p>
       </div>
       <button
