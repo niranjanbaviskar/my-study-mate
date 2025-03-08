@@ -7,7 +7,7 @@ import Study from './pages/Study'
 import Plan from './pages/Plan'
 import HomePage from './pages/HomePage'
 import Login from './pages/login'
-import News from './pages/news'
+import News from './pages/News'
 import Dashboard from './pages/Dashboard'
 import TherapyCards from './pages/TherapyCards'
 
