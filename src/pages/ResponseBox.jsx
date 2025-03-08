@@ -27,7 +27,7 @@ const ResponseBox = ({ response }) => {
       const timer = setTimeout(() => {
         setDisplayedText((prev) => prev + response[currentIndex])
         setCurrentIndex((prev) => prev + 1)
-      }, 50) // Adjust the speed of typing here
+      }, 50) // Adjust the speed typing
 
       return () => clearTimeout(timer)
     }
