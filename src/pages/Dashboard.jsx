@@ -7,7 +7,7 @@ import {
     Moon, Sun, Heart, Award, Bell, Clock, Sparkles, Brain,
     Zap, Fingerprint, TrendingUp, Target, Coffee, Music,
     Focus, Smile, Cloud, Droplets, ChevronRight, BarChart2,
-    Mic, MicOff, // Added missing icons
+    Mic, MicOff, // Added missed icons
 
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
