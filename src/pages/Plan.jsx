@@ -85,7 +85,7 @@ const StudyPlan = () => {
     <div className="min-h-screen bg-gray-900 text-white p-6">
       {/* Go to Dashboard Button */}
       {/* <button onClick={() => window.location.href = "/"} className="fixed top-6 left-6 bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700 transition">
-        <Home /> Go to Dashboard
+        <Home /> Go to
       </button> */}
       <motion.button
         whileHover={{ scale: 1.05 }}
