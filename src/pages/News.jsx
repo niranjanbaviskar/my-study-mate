@@ -39,7 +39,7 @@ const EducationNews = () => {
       </motion.button>
       
       <h1 className="text-4xl font-bold text-center mb-6 flex justify-center items-center gap-2">
-        <Newspaper /> Daily Educational News
+        <Newspaper /> Daily Educational Updates
       </h1>
       
       {loading ? (
