@@ -617,7 +617,7 @@ const Dashboard = () => {
                             >
                                 {/* Activity Feed */}
                                 <CustomBox>
-                                    <h3 className="text-lg font-semibold mb-4">Recent Activity</h3>
+                                    <h3 className="text-lg font-semibold mb-4">Recent Activity Tab</h3>
                                     <div className="space-y-4">
                                         {[
                                             { icon: Book, text: "Used Therapy cards", time: "2h ago" },
