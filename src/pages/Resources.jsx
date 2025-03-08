@@ -96,7 +96,7 @@ function Resources() {
           </div>
         </div>
 
-        {/* Resource Categories */}
+        {/* Resource  */}
         <div className="space-y-12">
           {resources.map((category, index) => (
             <div key={index}>
