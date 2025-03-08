@@ -42,7 +42,7 @@ function Blog() {
           </p>
         </div>
 
-        {/* Blog Posts Grid */}
+        {/* Blog Posts Gd */}
         <div className="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
           {blogPosts.map((post, index) => (
             <article key={index} className="group overflow-hidden rounded-2xl bg-white/10 backdrop-blur-lg transition-transform duration-300 hover:scale-[1.02]">
