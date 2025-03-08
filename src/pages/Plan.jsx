@@ -90,7 +90,7 @@ const StudyPlan = () => {
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => navigate("/")} // <-- Now navigate is defined
+        onClick={() => navigate("/")} // <-- Now navigate 
         className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-100 dark:bg-purple-900/20 
                   text-purple-600 dark:text-purple-300 font-medium hover:shadow-md transition-shadow"
       >
