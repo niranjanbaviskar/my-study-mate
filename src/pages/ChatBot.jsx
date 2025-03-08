@@ -76,7 +76,7 @@ function StudentCareerBot() {
 
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(input);
-        utterance.lang = "en-IN"; // Indian English accent
+        utterance.lang = "en-US"; // Indian English accent
         utterance.rate = 1.5; // Normal speed
         utterance.pitch = 1; // Normal pitch
 
