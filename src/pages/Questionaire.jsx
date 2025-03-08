@@ -66,7 +66,7 @@ function Questionnaire() {
     }
     setIsSubmitted(true)
     console.log("Submitted answers:", answers)
-    // Store answers in localStorage
+    // Store answers in 
     localStorage.setItem("questionnaireAnswers", JSON.stringify(answers))
     // Redirect to ChatBot page after a 
     
