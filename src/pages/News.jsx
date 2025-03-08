@@ -12,7 +12,7 @@ const EducationNews = () => {
     const fetchNews = async () => {
       try {
         const response = await fetch(
-          "https://newsapi.org/v2/everything?q=education&apiKey=d1d76628090f44caac49652923298fcc"
+          "https://newsapi.org/v2/everything?q=education&apiKey=0e01e6a9ee8841bf826bb5bfb0854fae"
         );
         const data = await response.json();
         setNews(data.articles);
