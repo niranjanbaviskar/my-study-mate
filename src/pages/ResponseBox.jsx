@@ -36,7 +36,7 @@ const ResponseBox = ({ response }) => {
   if (!response) return null
   
   return (
-    <div className="fixed bottom-45 left-0 right-0 bg-opacity-100 backdrop-blur-md p-4 pb-15 rounded-t-lg">
+    <div className="fixed bottom-35 left-0 right-0 bg-opacity-100 backdrop-blur-md p-4 pb-15 rounded-t-lg">
       <div className="max-w-7xl mx-auto text-white font-mono">{displayedText}</div>
     </div>
   )
