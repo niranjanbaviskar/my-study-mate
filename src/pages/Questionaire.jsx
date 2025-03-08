@@ -68,7 +68,8 @@ function Questionnaire() {
     console.log("Submitted answers:", answers)
     // Store answers in localStorage
     localStorage.setItem("questionnaireAnswers", JSON.stringify(answers))
-    // Redirect to ChatBot page after a short delay
+    // Redirect to ChatBot page after a 
+    
     setTimeout(() => {
       navigate("/chatbot")
     }, 2000)
