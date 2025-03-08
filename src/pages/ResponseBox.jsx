@@ -13,7 +13,7 @@ const ResponseBox = ({ response }) => {
     setStartTyping(false)
 
     if (response) {
-      // Add a 2-second delay before starting the typing effect
+      // Add a 2-second delay
       const delayTimer = setTimeout(() => {
         setStartTyping(true)
       }, 2000)
