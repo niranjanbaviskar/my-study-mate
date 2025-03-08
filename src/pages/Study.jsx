@@ -162,7 +162,7 @@ const sampleData = {
         title: "Cyber Security Fundamentals",
         platform: "Udemy",
         url: "https://www.udemy.com/course/cybersecurity-fundamentals/",
-        rating: 4.5,
+        rating: 4.2,
         enrolled: 25000,
         price: "₹599",
         image: "https://img-c.udemycdn.com/course/750x422/3654420_6ef3_8.jpg"
