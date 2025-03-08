@@ -136,7 +136,7 @@ const StudyPlan = () => {
       </div>
       {showQuiz && quiz && (
   <div className="mt-8 bg-gray-800 p-6 rounded-lg shadow-lg border border-blue-500">
-    <h2 className="text-3xl font-bold text-blue-400">🧠 Quiz Time!</h2>
+    <h2 className="text-3xl font-bold text-blue-400">🧠 Quiz Time !</h2>
     <p className="text-gray-300 text-lg mt-2">Answer the following questions:</p>
 
     <div className="mt-6">
