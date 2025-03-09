@@ -100,39 +100,58 @@ Provide the next response in a warm, natural, and supportive tone, ensuring the 
     return [bot_reply, chat_history];
   }
 
-  const generateSpeech = (input) => {
+  const generateSpeech = async (input) => {
     setLoading(true);
     setError(null);
 
+    // const sampleText =
+    //   "Welcome to our interactive AI experience. I am your virtual assistant, designed to help and guide you through this journey. My voice is powered by advanced technology, and I'm here to demonstrate the seamless integration of speech and visual elements. Watch how the bubble responds to my voice, creating a harmonious blend of sight and sound.";
+
+    const apiKey = "sk_1dff9ba58fcc25872f8a3c078627dd45db22e2dfb1b23827"; // Replace manually
+    const voiceId = "LwYdKEzudGYdbAMZqkez";
+
     try {
-        if (springRef.current?.startSpeaking) {
-            springRef.current.startSpeaking();
+      if (springRef.current?.startSpeaking) {
+        springRef.current.startSpeaking();
+      }
+
+      const response = await axios.post(
+        `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
+        { text: input },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "xi-api-key": apiKey,
+          },
+          responseType: "blob",
         }
+      );
 
-        const synth = window.speechSynthesis;
-        const utterance = new SpeechSynthesisUtterance(input);
-        utterance.lang = "en-US"; // Set language
-        utterance.rate = 1.5; // Adjust speech speed
-        utterance.pitch = 1; // Adjust pitch
+      const audioUrl = URL.createObjectURL(response.data);
+      const audio = new Audio(audioUrl);
+      audioRef.current = audio;
 
-        utterance.onend = () => {
-            if (springRef.current?.stopSpeaking) {
-                springRef.current.stopSpeaking();
-            }
-            setLoading(false);
-        };
-
-        synth.speak(utterance);
-    } catch (error) {
-        setError("Failed to generate speech. Please try again.");
-        console.error("Error generating speech:", error);
+      audio.onended = () => {
         if (springRef.current?.stopSpeaking) {
-            springRef.current.stopSpeaking();
+          springRef.current.stopSpeaking();
         }
         setLoading(false);
-    }
-};
+      };
 
+      await audio.play().catch((err) => {
+        console.error("Playback failed:", err);
+        setError("Playback error. Click the button again.");
+        setLoading(false);
+      });
+    } catch (error) {
+      setError("Failed to generate speech. Please try again.");
+      console.error("Error generating speech:", error);
+      if (springRef.current?.stopSpeaking) {
+        springRef.current.stopSpeaking();
+      }
+      setLoading(false);
+    }
+  };
 
   const startRecording = async () => {
     try {
