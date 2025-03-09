@@ -107,7 +107,7 @@ Provide the next response in a warm, natural, and supportive tone, ensuring the 
     // const sampleText =
     //   "Welcome to our interactive AI experience. I am your virtual assistant, designed to help and guide you through this journey. My voice is powered by advanced technology, and I'm here to demonstrate the seamless integration of speech and visual elements. Watch how the bubble responds to my voice, creating a harmonious blend of sight and sound.";
 
-    const apiKey = "sk_1dff9ba58fcc25872f8a3c078627dd45db22e2dfb1b23827"; // Replace manually
+    const apiKey = "sk_c8bc646814192aefe3cb1965e4d699326b76814e40b3162d"; // Replace manually
     const voiceId = "LwYdKEzudGYdbAMZqkez";
 
     try {
