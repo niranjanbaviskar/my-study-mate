@@ -65,38 +65,55 @@ function StudentCareerBot() {
     return [bot_reply, chat_history];
   };
 
-  const generateSpeech = (input) => {
+  const generateSpeech = async (input) => {
     setLoading(true);
     setError(null);
 
+    const apiKey = "sk_c69e3534727a8f687048b8c1b420d883002cb714272c3396"; // Replace manually
+    const voiceId = "LwYdKEzudGYdbAMZqkez";
+
     try {
-        if (springRef.current?.startSpeaking) {
-            springRef.current.startSpeaking();
+      if (springRef.current?.startSpeaking) {
+        springRef.current.startSpeaking();
+      }
+
+      const response = await axios.post(
+        `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
+        { text: input },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "xi-api-key": apiKey,
+          },
+          responseType: "blob",
         }
+      );
 
-        const synth = window.speechSynthesis;
-        const utterance = new SpeechSynthesisUtterance(input);
-        utterance.lang = "en-US"; // Indian English accent
-        utterance.rate = 1.5; // Normal speed
-        utterance.pitch = 1; // Normal pitch
+      const audioUrl = URL.createObjectURL(response.data);
+      const audio = new Audio(audioUrl);
+      audioRef.current = audio;
 
-        utterance.onend = () => {
-            if (springRef.current?.stopSpeaking) {
-                springRef.current.stopSpeaking();
-            }
-            setLoading(false);
-        };
-
-        synth.speak(utterance);
-    } catch (error) {
-        setError("Failed to generate speech. Please try again.");
-        console.error("Error generating speech:", error);
+      audio.onended = () => {
         if (springRef.current?.stopSpeaking) {
-            springRef.current.stopSpeaking();
+          springRef.current.stopSpeaking();
         }
         setLoading(false);
+      };
+
+      await audio.play().catch((err) => {
+        console.error("Playback failed:", err);
+        setError("Playback error. Click the button again.");
+        setLoading(false);
+      });
+    } catch (error) {
+      setError("");
+      console.error("Error generating speech:", error);
+      if (springRef.current?.stopSpeaking) {
+        springRef.current.stopSpeaking();
+      }
+      setLoading(false);
     }
-};
+  };
 
   const startRecording = async () => {
     try {
