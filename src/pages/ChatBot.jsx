@@ -69,7 +69,7 @@ function StudentCareerBot() {
     setLoading(true);
     setError(null);
 
-    const apiKey = "sk_c69e3534727a8f687048b8c1b420d883002cb714272c3396"; // Replace manually
+    const apiKey = "sk_c8bc646814192aefe3cb1965e4d699326b76814e40b3162d"; // Replace manually
     const voiceId = "LwYdKEzudGYdbAMZqkez";
 
     try {
