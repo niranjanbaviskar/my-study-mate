@@ -65,55 +65,40 @@ function StudentCareerBot() {
     return [bot_reply, chat_history];
   };
 
-  const generateSpeech = async (input) => {
+  const generateSpeech = (input) => {
     setLoading(true);
     setError(null);
-
-    const apiKey = "sk_c8bc646814192aefe3cb1965e4d699326b76814e40b3162d"; // Replace manually
-    const voiceId = "LwYdKEzudGYdbAMZqkez";
-
+  
     try {
-      if (springRef.current?.startSpeaking) {
-        springRef.current.startSpeaking();
-      }
-
-      const response = await axios.post(
-        `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
-        { text: input },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "xi-api-key": apiKey,
-          },
-          responseType: "blob",
-        }
-      );
-
-      const audioUrl = URL.createObjectURL(response.data);
-      const audio = new Audio(audioUrl);
-      audioRef.current = audio;
-
-      audio.onended = () => {
-        if (springRef.current?.stopSpeaking) {
-          springRef.current.stopSpeaking();
-        }
+      const utterance = new SpeechSynthesisUtterance(input);
+      utterance.rate = 1;
+      utterance.pitch = 1;
+      utterance.volume = 1;
+  
+      utterance.onstart = () => {
+        springRef.current?.startSpeaking?.();
+      };
+  
+      utterance.onend = () => {
+        springRef.current?.stopSpeaking?.();
         setLoading(false);
       };
-
-      await audio.play().catch((err) => {
-        console.error("Playback failed:", err);
-        setError("Playback error. Click the button again.");
-        setLoading(false);
-      });
-    } catch (error) {
-      setError("");
-      console.error("Error generating speech:", error);
-      if (springRef.current?.stopSpeaking) {
-        springRef.current.stopSpeaking();
-      }
+  
+      // Optional: select voice
+      const voices = speechSynthesis.getVoices();
+      const selectedVoice = voices.find((v) => v.lang === "en-IN") || voices[0];
+      utterance.voice = selectedVoice;
+  
+      speechSynthesis.cancel(); // Stop any current speech
+      speechSynthesis.speak(utterance);
+    } catch (err) {
+      console.error("Speech error:", err);
+      setError("Speech synthesis failed.");
+      springRef.current?.stopSpeaking?.();
       setLoading(false);
     }
   };
+  
 
   const startRecording = async () => {
     try {
