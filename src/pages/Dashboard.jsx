@@ -7,7 +7,7 @@ import {
     Moon, Sun, Heart, Award, Bell, Clock, Sparkles, Brain,
     Zap, Fingerprint, TrendingUp, Target, Coffee, Music,
     Focus, Smile, Cloud, Droplets, ChevronRight, BarChart2,
-    Mic, MicOff, // Added missed icons
+    Mic, MicOff, // Added missing icons
 
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -471,8 +471,7 @@ const Dashboard = () => {
                             </motion.div>
 
                             <div className="flex items-center space-x-6">
-                                {/* Added therapy navigation buttons */}
-                                <motion.button
+                            <motion.button
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => navigate('/therapycards')}
@@ -480,6 +479,16 @@ const Dashboard = () => {
                     text-pink-600 dark:text-pink-300 font-medium hover:shadow-md transition-shadow"
                                 >
                                     Therapy Cards
+                                </motion.button>
+                                {/* Added therapy navigation buttons */}
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={() => window.open('http://pdf-summerizer-buq7fmbnjw9gcqdihwh6vs.streamlit.app/', '_blank')}
+                                    className="px-4 py-2 rounded-xl bg-pink-100 dark:bg-pink-900/20 
+                    text-pink-600 dark:text-pink-300 font-medium hover:shadow-md transition-shadow"
+                                >
+                                    pdf summerizer
                                 </motion.button>
 
                                 <motion.button
@@ -647,7 +656,7 @@ const Dashboard = () => {
                                     <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
                                     <div className="grid grid-cols-2 gap-4">
                                         {[
-                                            { icon: Heart, label: "Therapy Cards" },
+                                            { icon: Heart, label: "Therapy Cards", link: "/TherapyCards" },
                                             { icon: Brain, label: "personalized Plan" },
                                             { icon: Book, label: "personalized Study" },
                                             { icon: Activity, label: "Talk with AIGURU" }
