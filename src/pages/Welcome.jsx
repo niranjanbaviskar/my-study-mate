@@ -100,95 +100,58 @@ Provide the next response in a warm, natural, and supportive tone, ensuring the 
     return [bot_reply, chat_history];
   }
 
-  const generateSpeech = async (input) => {
-    setLoading(true);
-    setError(null);
+ const generateSpeech = (input) => {
+  setLoading(true);
+  setError(null);
 
-    // const sampleText =
-    //   "Welcome to our interactive AI experience. I am your virtual assistant, designed to help and guide you through this journey. My voice is powered by advanced technology, and I'm here to demonstrate the seamless integration of speech and visual elements. Watch how the bubble responds to my voice, creating a harmonious blend of sight and sound.";
+  try {
+    const utterance = new SpeechSynthesisUtterance(input);
 
-    const apiKey = "sk_c8bc646814192aefe3cb1965e4d699326b76814e40b3162d"; // Replace manually
-    const voiceId = "LwYdKEzudGYdbAMZqkez";
+    // Optional: Set pitch, rate, volume
+    utterance.rate = 2;
+    utterance.pitch = 1;
+    utterance.volume = 2;
 
-    try {
+    // Load voices and select an Indian English voice
+    const setVoice = () => {
+      const voices = speechSynthesis.getVoices();
+      const indianVoice = voices.find((v) => v.lang === 'en-IN');
+      if (indianVoice) {
+        utterance.voice = indianVoice;
+      }
+      speechSynthesis.speak(utterance);
+    };
+
+    // Handle voice loading asynchronously
+    if (speechSynthesis.getVoices().length === 0) {
+      speechSynthesis.onvoiceschanged = setVoice;
+    } else {
+      setVoice();
+    }
+
+    // Hook into animation triggers
+    utterance.onstart = () => {
       if (springRef.current?.startSpeaking) {
         springRef.current.startSpeaking();
       }
+    };
 
-      const response = await axios.post(
-        `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
-        { text: input },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "xi-api-key": apiKey,
-          },
-          responseType: "blob",
-        }
-      );
-
-      const audioUrl = URL.createObjectURL(response.data);
-      const audio = new Audio(audioUrl);
-      audioRef.current = audio;
-
-      audio.onended = () => {
-        if (springRef.current?.stopSpeaking) {
-          springRef.current.stopSpeaking();
-        }
-        setLoading(false);
-      };
-
-      await audio.play().catch((err) => {
-        console.error("Playback failed:", err);
-        setError("Playback error. Click the button again.");
-        setLoading(false);
-      });
-    } catch (error) {
-      setError("Failed to generate speech. Please try again.");
-      console.error("Error generating speech:", error);
+    utterance.onend = () => {
       if (springRef.current?.stopSpeaking) {
         springRef.current.stopSpeaking();
       }
       setLoading(false);
+    };
+  } catch (error) {
+    setError("Failed to generate speech. Please try again.");
+    console.error("Error generating speech:", error);
+    if (springRef.current?.stopSpeaking) {
+      springRef.current.stopSpeaking();
     }
-  };
+    setLoading(false);
+  }
+};
 
-  const startRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: "audio/webm",
-      });
-
-      mediaRecorderRef.current = mediaRecorder;
-      chunksRef.current = [];
-
-      mediaRecorder.ondataavailable = (e) => {
-        if (e.data.size > 0) {
-          chunksRef.current.push(e.data);
-        }
-      };
-
-      mediaRecorder.onstop = async () => {
-        const audioBlob = new Blob(chunksRef.current, { type: "audio/webm" });
-        await sendAudioToAPI(audioBlob);
-
-        // Stop all tracks to release the microphone
-        stream.getTracks().forEach((track) => track.stop());
-      };
-
-      mediaRecorder.start();
-      setIsRecording(true);
-
-      // Start timer
-      timerRef.current = setInterval(() => {
-        setRecordingTime((prev) => prev + 1);
-      }, 1000);
-    } catch (err) {
-      setError("Failed to access microphone. Please ensure you have granted permission.");
-      console.error("Error accessing microphone:", err);
-    }
-  };
 
   const stopRecording = () => {
     try {
