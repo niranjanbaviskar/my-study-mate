@@ -24,7 +24,7 @@ With a secure login dashboard, every user has a personal space to track their pr
 ## 🧠 Team & Approach
 
 ### Team Name:  
-`CodeCrafters`
+`TechTrio`
 
 ### Team Members:  
 - Niranjan Baviskar ([GitHub](https://github.com/niranjanbaviskar) / [LinkedIn](https://linkedin.com/in/niranjanbaviskar) / Full Stack Developer)  
